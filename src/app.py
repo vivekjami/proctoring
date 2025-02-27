@@ -2,7 +2,6 @@ from flask import Flask, jsonify
 import threading
 import detection  # Ensure this is correctly importing your detection module
 import head_pose
-import audio
 import os
 
 PORT = int(os.environ.get("PORT", 5000))
@@ -24,13 +23,10 @@ if __name__ == "__main__":
     flask_thread.start()
 
     head_pose_thread = threading.Thread(target=head_pose.pose, daemon=True)
-    audio_thread = threading.Thread(target=audio.sound, daemon=True)
     detection_thread = threading.Thread(target=detection.run_detection, daemon=True)
 
     head_pose_thread.start()
-    audio_thread.start()
     detection_thread.start()
 
     head_pose_thread.join()
-    audio_thread.join()
     detection_thread.join()
