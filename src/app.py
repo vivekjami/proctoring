@@ -3,6 +3,9 @@ import threading
 import detection  # Ensure this is correctly importing your detection module
 import head_pose
 import audio
+import os
+
+PORT = int(os.environ.get("PORT", 5000))
 
 app = Flask(__name__)
 
@@ -14,7 +17,7 @@ def get_cheat_data():
     })
 
 def start_flask():
-    app.run(host='127.0.0.1', port=5000, debug=False)
+    app.run(host='0.0.0.0', port=PORT, debug=False)
 
 if __name__ == "__main__":
     flask_thread = threading.Thread(target=start_flask, daemon=True)
