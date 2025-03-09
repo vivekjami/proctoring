@@ -1,10 +1,12 @@
 from flask import Flask, jsonify
+from flask_cors import CORS  # Import CORS
 import threading
 import detection  # Ensure correct import
 import head_pose  # Ensure correct import
 import os
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS
 
 # Global event to signal threads to stop
 stop_event = threading.Event()
